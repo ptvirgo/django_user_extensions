@@ -1,21 +1,18 @@
 {% extends 'base.html' %}
+{% load form_field %}
+
 {% block content %}
     <form method="post">
         {% csrf_token %}
 
         {% autoescape off %}
-        {% for field in form %}
-            <div class="form_field">
-                {{ field.label_tag }}
-                {{ field }}
-                {% if field.help_text %}
-                    <span class="form_help">{{ field.help_text }}</span>
-                {% endif %}
-                {% for error in field.errors %}
-                    <span class="error">{{ error }}</span>
-                {% endfor %}
-            </div>
+        {% for field in user_form %}{% if field.name != 'captcha' %}
+            {% ff field %}
+        {% endif %}{% endfor %}
+        {% for field in profile_form %}
+            {% ff field %}
         {% endfor %}
+        {% ff user_form.captcha %}
         {% endautoescape %}
 
         <button type="submit">Sign up</button>

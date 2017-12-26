@@ -4,7 +4,7 @@ from . import forms
 from django.urls import path
 
 urlpatterns = [
-    path('register/', views.register, name='register'),
+    path('register/', views.register_user, name='register'),
 
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
@@ -15,7 +15,7 @@ urlpatterns = [
          name='password_change_done'),
 
     path('password_reset/', auth_views.PasswordResetView.as_view(
-         form_class=forms.ExtendedUserCreationForm),
+         form_class=forms.ExtendedUserForm),
          name='password_reset'),
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(),
          name='password_reset_done'),

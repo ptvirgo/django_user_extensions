@@ -1,10 +1,9 @@
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 
-from .forms import ExtendedUserCreationForm
+from .forms import ExtendedUserForm, ExtendedUserProfileForm
 
-
-def register(request):
+def register_user(request):
     '''Register and sign in a new user'''
 
     if request.method == 'POST':
@@ -21,7 +20,10 @@ def register(request):
             return redirect('home')
 
     else:
-        form = ExtendedUserCreationForm()
+
+        user_form = ExtendedUserForm()
+        profile_form = ExtendedUserProfileForm()
 
     return render(request, 'registration/register.html',
-                  {'form': form},  status=400)
+                  {'user_form': user_form, 'profile_form': profile_form},
+                  status=200)
