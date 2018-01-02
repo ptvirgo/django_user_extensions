@@ -28,7 +28,8 @@ class TestRegistrationView(TestCase):
 
         cls.authorized_client = authorized_client
         
-    def test_registration_user(self):
+    def test_registration_display(self):
+        '''Registration form displays properly'''
 
         response = self.client.get(reverse('register'))
         self.assertEqual(response.status_code, 200)
@@ -37,6 +38,21 @@ class TestRegistrationView(TestCase):
         self.assertContains(response, 'Email')
         self.assertContains(response, 'Password')
         self.assertContains(response, 'Captcha')
+
+    def test_registration_of_user(self):
+        '''Registration creates a user'''
+
+        response=self.client.post(
+            reverse('register'),
+                    {'username': 'Larry', 'email': 'larry@testing.com',
+                     'password1': 'theultimate',
+                     'password2': 'theultimate',
+                     'g-recaptcha-response': 'testing'})
+
+        UserModel = get_user_model()
+
+        user = UserModel.objects.get(username='Larry',
+                                     email='larry@testing.com')
 
     def test_profile_requires_login(self):
         '''Profile view without login should redirect'''

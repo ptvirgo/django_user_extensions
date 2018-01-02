@@ -9,13 +9,13 @@ def register_user(request):
     '''Register and sign in a new user'''
 
     if request.method == 'POST':
-        user_form = ExtendedUserForm(request.POST)
+        form = ExtendedUserForm(request.POST)
 
-        if user_form.is_valid():
+        if form.is_valid():
 
-            user_form.save()
+            form.save()
             username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
+            password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
             login(request, user)
 
@@ -27,7 +27,7 @@ def register_user(request):
 
         else:
             return render(request, 'registration/register.html',
-                          {'form': user_form}, status=400)
+                          {'form': form}, status=400)
 
     else:
 
