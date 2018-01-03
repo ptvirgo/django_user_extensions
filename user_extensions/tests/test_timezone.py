@@ -32,13 +32,12 @@ class TestTimezone(TestCase):
 
     def test_timezone_at_login(self):
         '''When a user logs in, the timezone should be set.'''
-        
+
         self.authorized_client.get(reverse('profile'))
         self.assertEqual(get_current_timezone_name(), 'America/Metlakatla')
 
     def test_timezone_changes(self):
         '''When the user saves a new timezone, it should be set.'''
-
 
         response = self.authorized_client.post(
             reverse('profile'),

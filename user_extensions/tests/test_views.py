@@ -1,7 +1,6 @@
 from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth import get_user_model
-from ..models import ExtendedUserProfile
 
 
 class TestRegistrationView(TestCase):
@@ -27,7 +26,7 @@ class TestRegistrationView(TestCase):
             raise RuntimeError('Could not log in to test server')
 
         cls.authorized_client = authorized_client
-        
+
     def test_registration_display(self):
         '''Registration form displays properly'''
 
@@ -42,17 +41,17 @@ class TestRegistrationView(TestCase):
     def test_registration_of_user(self):
         '''Registration creates a user'''
 
-        response=self.client.post(
+        self.client.post(
             reverse('register'),
-                    {'username': 'Larry', 'email': 'larry@testing.com',
-                     'password1': 'theultimate',
-                     'password2': 'theultimate',
-                     'g-recaptcha-response': 'testing'})
+            {'username': 'Larry', 'email': 'larry@testing.com',
+             'password1': 'theultimate',
+             'password2': 'theultimate',
+             'g-recaptcha-response': 'testing'})
 
         UserModel = get_user_model()
 
-        user = UserModel.objects.get(username='Larry',
-                                     email='larry@testing.com')
+        UserModel.objects.get(username='Larry',
+                              email='larry@testing.com')
 
     def test_profile_requires_login(self):
         '''Profile view without login should redirect'''
@@ -73,7 +72,7 @@ class TestRegistrationView(TestCase):
 
     def test_profile_change(self):
         '''Editing a profile should show changes'''
-                
+
         response = self.authorized_client.post(
             reverse('profile'),
             {'country': 'NZ', 'timezone': 'Pacific/Auckland'})

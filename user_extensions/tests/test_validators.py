@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.core.exceptions import ValidationError
 from .. import validators
 
+
 class TestValidators(TestCase):
     '''Test django model validators'''
 
@@ -16,5 +17,5 @@ class TestValidators(TestCase):
         '''Time zones are validated'''
 
         self.assertEqual(validators.timezone('America/New_York'),
-'America/New_York')
+                         'America/New_York')
         self.assertRaises(ValidationError, validators.timezone, 'Forgot')

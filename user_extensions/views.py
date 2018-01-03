@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import ExtendedUserForm, ExtendedUserProfileForm
 from .models import ExtendedUserProfile
 
+
 def register_user(request):
     '''Register and sign in a new user'''
 
@@ -34,6 +35,7 @@ def register_user(request):
         return render(request, 'registration/register.html',
                       {'form': ExtendedUserForm()},
                       status=200)
+
 
 @login_required
 def update_profile(request):
