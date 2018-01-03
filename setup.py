@@ -9,7 +9,7 @@ with open('README.rst', 'r') as f:
 
 setup(
     name='django_user_extensions',
-    version='0.1.0',
+    version='0.2.0',
     description='Minor, important extensions to Django default users',
     long_description=README,
     author='Pablo Virgo',

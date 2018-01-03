@@ -14,7 +14,7 @@ class TestRegistrationView(TestCase):
 
         UserModel = get_user_model()
         user = UserModel(first_name='Test', last_name='User',
-                         username='tuser')
+                         username='tuser-registration')
         user.set_password('thisisatest123')
         user.save()
 

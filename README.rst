@@ -38,8 +38,10 @@ Add to your Django setup
     # ...
     }
 
+    MIDDLEWARE = [ # ...
+        user_extensions.middleware.TimezoneMiddleware]
+
     # Google Recaptcha Integration
     NOCAPTCHA = True
     RECAPTCHA_PUBLIC_KEY = '???'
     RECAPTCHA_PRIVATE_KEY = '???'
-
