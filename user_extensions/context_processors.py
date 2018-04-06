@@ -16,7 +16,7 @@ def add_jwt(request):
     timeout = now + settings.USER_EXTENSIONS['JWT_TIMEOUT']
     claim = {'exp': timeout.timestamp(),
              'nbf': now.timestamp(),
-             'sub': user.pk}
+             'sub': str(user.pk)}
 
     token = jwt.encode(
         claim, settings.SECRET_KEY, settings.USER_EXTENSIONS['JWT_ALGORITHM'])

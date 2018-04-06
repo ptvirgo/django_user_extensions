@@ -1,6 +1,9 @@
+from jose import jwt
+
 from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth import get_user_model
+from django.conf import settings
 
 
 class TestJWT(TestCase):
@@ -22,6 +25,7 @@ class TestJWT(TestCase):
         if not logged_in:
             raise RuntimeError("Could not log in to test server")
 
+        cls.user = user
         cls.authorized_client = client
 
     def test_anon_user_no_jwt(self):
@@ -43,3 +47,13 @@ class TestJWT(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue(len(response.context.get("jwt", None)) > 5)
         self.assertContains(response, "jwt")
+
+    def test_jwt_validates(self):
+        """JWT better decode properly"""
+
+        response = self.authorized_client.get(reverse("home"))
+        token = response.context["jwt"]
+        claim = jwt.decode(token, settings.SECRET_KEY,
+                           [getattr(settings, "JWT_ALGORITHM", "HS256")])
+
+        self.assertEqual(int(claim["sub"]), self.user.pk)
