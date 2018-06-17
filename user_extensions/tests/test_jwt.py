@@ -5,8 +5,24 @@ from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.conf import settings
 
+from .. import utils
+from ..factories import UserFactory
 
-class TestJWT(TestCase):
+
+class TestJWTUtil(TestCase):
+    """JWT utilities"""
+
+    def test_user_jwt(self):
+        """Can make JWT for a user, and get user from JWT"""
+        user = UserFactory()
+
+        token = utils.user_jwt(user)
+        lookup = utils.jwt_user(token)
+
+        self.assertEqual(user, lookup)
+
+
+class TestJWTContext(TestCase):
     """JWT Tokens should be available via response context"""
 
     @classmethod
