@@ -45,6 +45,7 @@ class GrapheneTestCase(TestCase):
 
         return result
 
+
 class TestGQLJWT(GrapheneTestCase):
     """JWT can be retrieved as with a user login"""
 
@@ -52,7 +53,7 @@ class TestGQLJWT(GrapheneTestCase):
         """
         A user can get a jwt with username, password, and google recaptcha
         token
-        """ 
+        """
 
         query = """
             { newJwt(username: "%s", password: "%s", captcha: "%s") }
@@ -61,7 +62,6 @@ class TestGQLJWT(GrapheneTestCase):
         result = self.execute(query)
 
         self.assertEqual(jwt_user(result["data"]["newJwt"]), self.user)
-
 
     def test_refresh_jwt(self):
         """

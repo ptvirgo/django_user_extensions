@@ -54,7 +54,6 @@ class TestJWTContext(TestCase):
         self.assertIs(response.context.get("jwt", None), None)
         self.assertNotContains(response, "jwt")
 
-
     def test_auth_user_has_jwt(self):
         """Authenticated users should have a jwt"""
 
