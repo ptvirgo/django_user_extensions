@@ -1,8 +1,12 @@
 from django.test import TestCase, Client
 from django.urls import reverse
+from django.utils import timezone
 from django.utils.timezone import get_current_timezone_name
 from django.contrib.auth import get_user_model
+
 from ..models import ExtendedUserProfile
+from ..utils import user_time
+from ..factories import ProfileFactory
 
 
 class TestTimezone(TestCase):
@@ -52,3 +56,20 @@ class TestTimezone(TestCase):
             {'country': 'US', 'timezone': 'America/Metlakatla'})
 
         self.assertEqual(get_current_timezone_name(), 'America/Metlakatla')
+
+
+class TestUserTime(TestCase):
+
+    def test_user_time(self):
+        '''
+        user_time should add the user's timezone to a time object
+        '''
+        prof = ProfileFactory()
+
+        ut = user_time(prof.user)
+        self.assertEqual(
+            ut.tzinfo.zone, prof.timezone, msg="failed with default time")
+
+        ut = user_time(prof.user, timezone.now())
+        self.assertEqual(
+            ut.tzinfo.zone, prof.timezone, msg="failed with specified time")

@@ -1,9 +1,11 @@
 import datetime
 from jose import jwt
+import pytz
 import requests
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
+from django.utils import timezone
 
 User = get_user_model()
 
@@ -54,3 +56,19 @@ def recaptcha_passed(captcha, ip=None):
 
     jsr = response.json()
     return jsr["success"] is True
+
+
+def user_time(user, time=None):
+    """
+    Set the timezone on the provided time to the one preferred by the user.
+    """
+    if time is None:
+        time = timezone.now()
+
+    try:
+        zone = pytz.timezone(user.extendeduserprofile.timezone)
+    except AttributeError:
+        zone = pytz.timezone('UTC')
+
+    usertime = timezone.localtime(time, zone)
+    return usertime
