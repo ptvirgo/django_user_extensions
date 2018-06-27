@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os
 from setuptools import findpackages, setup
 
 with open('README.rst', 'r') as f:
@@ -9,10 +8,10 @@ with open('README.rst', 'r') as f:
 
 setup(
     name='django_user_extensions',
-    version='0.2.0',
+    version='0.2.1',
     description='Minor, important extensions to Django default users',
     long_description=README,
     author='Pablo Virgo',
     author_email='mailbox@pablovirgo.com',
-    packages=find_packages()
+    packages=findpackages()
 )

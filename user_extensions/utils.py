@@ -7,6 +7,7 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
+
 def user_jwt(user):
     """Get a JWT for the User"""
     if user is None or not user.is_authenticated:
@@ -22,7 +23,7 @@ def user_jwt(user):
         claim, settings.SECRET_KEY, settings.USER_EXTENSIONS['JWT_ALGORITHM'])
 
     return token
-    
+
 
 def jwt_user(token):
     """Get a User from the JWT"""
@@ -42,7 +43,7 @@ def jwt_user(token):
 def recaptcha_passed(captcha, ip=None):
     """True if the given reCaptcha token validates via the google service"""
 
-    params = { "secret": settings.RECAPTCHA_PRIVATE_KEY, "response": captcha }
+    params = {"secret": settings.RECAPTCHA_PRIVATE_KEY, "response": captcha}
 
     if ip is not None:
         params["remoteip"] = ip

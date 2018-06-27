@@ -18,6 +18,10 @@ class TimezoneMiddleware(object):
 
             if profile:
                 user_tz = getattr(profile, 'timezone', None)
-                timezone.activate(pytz.timezone(user_tz))
+
+                if user_tz:
+                    timezone.activate(pytz.timezone(user_tz))
+                else:
+                    timezone.deactivate()
 
         return response
