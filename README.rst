@@ -7,7 +7,7 @@ django.contrib.auth model.  They are unified here.
 In particular:
 
 * google-recaptcha should prevent bot attempts to register users or alter
-passwords
+  passwords
 * users can specify their timezones
 * django context gets a user JWT
 
