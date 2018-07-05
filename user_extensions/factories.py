@@ -9,17 +9,18 @@ from .models import ExtendedUserProfile
 
 
 class UserFactory(factory.django.DjangoModelFactory):
+    """Generate a random user, for testing."""
     class Meta:
         model = get_user_model()
 
     username = factory.fuzzy.FuzzyText()
-    first_name = factory.Faker('first_name')
-    last_name = factory.Faker('last_name')
-    email = factory.Faker('email')
+    first_name = factory.Faker("first_name")
+    last_name = factory.Faker("last_name")
+    email = factory.Faker("email")
 
 
 class ProfileFactory(factory.django.DjangoModelFactory):
-
+    """Generate a user with profile, for testing"""
     class Meta:
         model = ExtendedUserProfile
 

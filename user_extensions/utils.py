@@ -16,13 +16,13 @@ def user_jwt(user):
         return
 
     now = datetime.datetime.now()
-    timeout = now + settings.USER_EXTENSIONS['JWT_TIMEOUT']
-    claim = {'exp': timeout.timestamp(),
-             'nbf': now.timestamp(),
-             'sub': str(user.pk)}
+    timeout = now + settings.USER_EXTENSIONS["JWT_TIMEOUT"]
+    claim = {"exp": timeout.timestamp(),
+             "nbf": now.timestamp(),
+             "sub": str(user.pk)}
 
     token = jwt.encode(
-        claim, settings.SECRET_KEY, settings.USER_EXTENSIONS['JWT_ALGORITHM'])
+        claim, settings.SECRET_KEY, settings.USER_EXTENSIONS["JWT_ALGORITHM"])
 
     return token
 
@@ -43,7 +43,7 @@ def jwt_user(token):
 
 
 def recaptcha_passed(captcha, ip=None):
-    """True if the given reCaptcha token validates via the google service"""
+    """Validate a google reCaptcha token"""
 
     params = {"secret": settings.RECAPTCHA_PRIVATE_KEY, "response": captcha}
 
@@ -68,7 +68,7 @@ def user_time(user, time=None):
     try:
         zone = pytz.timezone(user.extendeduserprofile.timezone)
     except AttributeError:
-        zone = pytz.timezone('UTC')
+        zone = pytz.timezone("UTC")
 
     usertime = timezone.localtime(time, zone)
     return usertime

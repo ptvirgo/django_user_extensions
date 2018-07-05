@@ -4,26 +4,26 @@ from . import forms
 from django.urls import path
 
 urlpatterns = [
-    path('register/', views.register_user, name='register'),
-    path('profile/', views.update_profile, name='profile'),
+    path("register/", views.register_user, name="register"),
+    path("profile/", views.update_profile, name="profile"),
 
-    path('login/', auth_views.LoginView.as_view(), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path("login/", auth_views.LoginView.as_view(), name="login"),
+    path("logout/", auth_views.LogoutView.as_view(), name="logout"),
 
-    path('password_change/', auth_views.PasswordChangeView.as_view(),
-         name='password_change'),
-    path('password_change/done/', auth_views.PasswordChangeDoneView.as_view(),
-         name='password_change_done'),
+    path("password_change/", auth_views.PasswordChangeView.as_view(),
+         name="password_change"),
+    path("password_change/done/", auth_views.PasswordChangeDoneView.as_view(),
+         name="password_change_done"),
 
-    path('password_reset/', auth_views.PasswordResetView.as_view(
+    path("password_reset/", auth_views.PasswordResetView.as_view(
          form_class=forms.ExtendedUserForm),
-         name='password_reset'),
-    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(),
-         name='password_reset_done'),
+         name="password_reset"),
+    path("password_reset/done/", auth_views.PasswordResetDoneView.as_view(),
+         name="password_reset_done"),
 
-    path('reset/<uidb64>/<token>/',
+    path("reset/<uidb64>/<token>/",
          auth_views.PasswordResetConfirmView.as_view(),
-         name='password_reset_confirm'),
-    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(),
-         name='password_reset_complete'),
+         name="password_reset_confirm"),
+    path("reset/done/", auth_views.PasswordResetCompleteView.as_view(),
+         name="password_reset_complete"),
 ]

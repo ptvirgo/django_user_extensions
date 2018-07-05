@@ -8,7 +8,7 @@ with open('README.rst', 'r') as f:
 
 setup(
     name='django_user_extensions',
-    version='0.2.1',
+    version='0.2.3',
     description='Minor, important extensions to Django default users',
     long_description=README,
     author='Pablo Virgo',

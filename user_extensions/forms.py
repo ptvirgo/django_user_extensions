@@ -6,7 +6,7 @@ from captcha.fields import ReCaptchaField
 
 
 class ExtendedPasswordResetForm(PasswordResetForm):
-
+    """Add recaptcha field to standard password reset form."""
     class Meta:
         model = get_user_model()
 
@@ -14,11 +14,11 @@ class ExtendedPasswordResetForm(PasswordResetForm):
 
 
 class ExtendedUserForm(UserCreationForm):
-    '''Add recaptcha and timezone to the standard creation form.'''
+    """Add recaptcha and timezone to the standard creation form."""
 
     class Meta:
         model = get_user_model()
-        fields = ['username', 'email', 'password1', 'password2', 'captcha']
+        fields = ["username", "email", "password1", "password2", "captcha"]
 
     captcha = ReCaptchaField()
 
@@ -27,4 +27,4 @@ class ExtendedUserProfileForm(ModelForm):
 
     class Meta:
         model = models.ExtendedUserProfile
-        fields = ['country', 'timezone']
+        fields = ["country", "timezone"]

@@ -13,7 +13,7 @@ timezones = [(t, t) for t in pytz.all_timezones]
 
 
 class ExtendedUserProfile(models.Model):
-    '''Time zone and other standardized details here.'''
+    """Time zone and other standardized details here."""
 
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
                                 on_delete=models.CASCADE)
@@ -21,9 +21,9 @@ class ExtendedUserProfile(models.Model):
     country = models.CharField(max_length=2,
                                validators=[validators.country_code],
                                choices=countries,
-                               default='US')
+                               default="US")
 
     timezone = models.CharField(max_length=32,
                                 validators=[validators.timezone],
                                 choices=timezones,
-                                default='US/Eastern')
+                                default="US/Eastern")
